@@ -1,0 +1,678 @@
+@font-face {
+    font-family : ProximaNova-Light;
+    src         : url('fonts/ProximaNova-Light.otf');
+}
+
+@font-face {
+    font-family : ProximaNova-Regular;
+    src         : url('fonts/ProximaNova-Regular.otf');
+}
+
+@font-face {
+    font-family : ProximaNova-Bold;
+    src         : url('fonts/ProximaNova-Bold.otf');
+}
+
+@font-face {
+    font-family : ProximaNova-Extrabold;
+    src         : url('fonts/ProximaNova-Extrabold.otf');
+}
+
+/* ------------------------------------------------------------------
+General Styles
+------------------------------------------------------------------ */
+
+body {
+    background-color: #f0f0f0;
+    overflow         : hidden;
+    font             : 400 14px/1.8 "ProximaNova-Regular", 'Helvetica', 'Arial', San-serif;
+    color            : #777;
+}
+
+a {
+    transition : all 0.25s ease;
+}
+
+a:hover {
+    text-decoration : none;
+    cursor          : pointer;
+}
+
+b {
+    font-family : ProximaNova-Bold;
+}
+
+strong {
+    font-family : ProximaNova-Extrabold;
+}
+
+input[type=radio] {
+    box-sizing: border-box;
+    padding: 0;
+    margin-right: 4px;
+}
+
+.upper {
+    text-transform : uppercase;
+}
+
+.shine {
+    color       : #fff;
+    text-shadow : 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+.dark {
+    color       : rgba(0, 0, 0, 0.7);
+    text-shadow : 0 0 10px rgba(0, 0, 0, 0.15);
+}
+
+/* ------------------------------------------------------------------
+Main Styles
+------------------------------------------------------------------ */
+#main-title {
+    display : block;
+    font-family : ProximaNova-Bold;
+    width: 194px;
+    font-size: 30px;
+
+    padding-bottom: 20px;
+    /* border-bottom: 8px solid #42aafb; */
+}
+#main-gesture{
+    width : 160px;
+    height : 160px;
+
+}
+.general-info {position : absolute;top : 0;z-index :1;padding: 20px;}
+
+
+.log-container{
+    width: 960px;
+    padding-top: 10px;
+    margin : 0 auto;
+    /* background : #fff; */
+}
+.main-panel {
+    height: 100%;
+    position: relative;
+    width: 50%;
+    padding:20px;
+    padding-top: 10px;
+    padding-bottom: 0;
+    float: left;
+}
+
+
+
+
+
+/*
+log
+*/
+
+
+
+.log-row{
+    /* border-top: 3px solid #eaeaea; */
+    /* height: 100px; */
+    background: #f2f6f9;
+    /* box-shadow: 5px 5px 40px rgb(180, 222, 254); */
+}
+
+.log-row label{
+    font-size : 12px;
+    margin-bottom : 0;
+}
+
+
+.info-sign-dot{
+    display : inline-block;
+    width : 12px;
+    height : 12px;
+    margin-right : 10px;
+    border-radius: 50%;
+    background : #d95353;
+}
+.info-sign-dot.on{
+    background : #7cdb5c;
+}
+
+
+.log-row .main-panel-content{
+    height : 100px;
+    padding : 6px 20px;
+}
+
+.log-row .main-panel{
+    padding-bottom : 0px;
+}
+
+.log-panel{
+    width: 240px;
+
+    padding : 10px;
+
+}
+.log-panel-content:hover{
+    box-shadow: 0 12px 34px #1b406926;
+}
+.log-panel.wide{
+    width : 480px;
+}
+
+.log-panel-content{
+    position : relative;
+    padding : 5px 20px;
+    background: #ffffff;
+    border-radius: 4px;
+    height : 120px;
+    transition: all 0.5s;
+    box-shadow: 0 4px 10px rgba(126, 136, 146, 0.15);
+}
+
+.log-panel-content h2{
+    margin-top: 13px;
+    margin-bottom: 0;
+    font-size: 18px;
+}
+
+.log-panel-content h3{
+    margin : 0;
+    color: #000000;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    font-size :14px;
+}
+
+.log-panel-content h4{
+    font-size : 12px;
+    margin-bottom: 2px;
+}
+
+.log-panel-content.yellow {
+    color: #ffffff;
+    background: #fcb903;
+}
+.log-panel-content.green {
+    color : #ffffff;
+    background : #3fd58e;
+}
+.log-panel-content.red {
+    color : #ffffff;
+
+    background : #f15c5c;
+}
+.log-panel-content.blue{
+    color : #ffffff;
+    background: #485a75;
+}
+.log-panel-content.blue h3{
+    color : #ffffff;
+}
+
+.log-panel .btn-primary{
+    color: #fff;
+    background-color: #42aafb;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 6px 16px;
+}
+
+.gesture-preview{
+    border-radius: 6px;
+    width: 150px;
+    height: 68px;
+    background: #42aafb;
+    position : absolute;
+    right: 25px;
+    top: 35px;
+}
+
+.data-text{
+    color:#42aafb;
+}
+
+
+
+/*
+main-panel
+*/
+.main-panel-content{
+    float: left;
+    width :375px;
+    /* left : 0; */
+    /* box-shadow: 0 5px 12px rgba(0, 0, 0, 0.02); */
+    padding : 25px;
+    overflow: hidden;
+}
+.main-panel-content.left{
+    float: right;
+    /* border-right: 1px solid; */
+}
+.main-panel.small .main-panel-content{
+    width :167.5px;
+}
+
+.main-panel.wide .main-panel-content{
+    width :582.5px;
+}
+
+
+
+
+
+
+/*
+watch panel!**!
+*/
+
+
+
+.panel-title{color: #383d41;text-align: center;font-size: 25px;padding: 10px 20px;margin: -25px;margin-bottom: 0px;}
+
+
+
+.watch-row {background: #fff;}
+
+.watch-panel {/* height  : 100%; */}
+
+.watch-container {
+    width: 325px;
+    height: 325px;
+    border-radius : 50%;
+    overflow      : hidden;
+
+    position      : relative;
+    /* border: 7px solid #289fff; */
+    box-shadow: 5px 5px 40px #1f242959;
+}
+
+.watch-screen {cursor        : url(../img/circle.png), auto;position      : absolute;width: 325px;height: 325px;border-radius : 50%;overflow      : hidden;background    : #353f46;}
+
+.watch-content {
+    position : absolute;
+    /* left     : -340px; */
+    width: 325px;
+    height: 325px;
+}
+
+.watch-label {
+    margin-top : 10px;
+    text-align : center;
+}
+
+.info-panel{
+    /* height : 100%; */
+    position: relative;
+}
+
+.info-content{
+    width : 100%;
+    height : 325px;
+    overflow: hidden;
+}
+
+
+
+.info-graph img{
+    position : relative;
+    top: -42px;
+    left: -37px;
+    width: 380px;
+    /* height : 360px; */
+}
+
+#slider {
+    position : absolute;
+    left     : 150px;
+    top      : 45px;
+}
+
+.screen-btn {
+    border-radius : 50%;
+    width         : 180px;
+    height        : 180px;
+    background    : #667890;
+    font-size     : 18px;
+    position      : absolute;
+    z-index       : 2;
+    box-shadow: 0px 5px 12px rgba(0,0,0,0.17);
+
+}
+
+.screen-btn:hover {
+    background          : #40d0bb;
+    transition-duration : 2000ms;
+
+}
+
+.screen-btn span {
+    color      : #ffffff;
+    position   : absolute;
+    width      : 100%;
+    text-align : center;
+
+}
+
+.top-btn {
+    top  : -200px;
+    left : 72.5px;
+}
+
+.bottom-btn {
+    bottom : -200px;
+    left   : 72.5px;
+}
+
+.left-btn {
+    left : -200px;
+    top  : 72.5px;
+}
+
+.right-btn {
+    right : -200px;
+    top   : 72.5px;
+}
+
+.top-btn span {
+    bottom : 10px;
+}
+
+.bottom-btn span {
+    top : 10px;
+}
+
+.left-btn span {
+    top        : 40%;
+    right      : 10px;
+    text-align : right;
+}
+
+.right-btn span {
+    top        : 40%;
+    left       : 10px;
+    text-align : left;
+}
+.swiper-container {
+    width: 100%;
+    height: 325px;
+}
+
+.swiper-slide {
+    background    : url('../img/img.jpg');
+    height: 325px;
+    border-radius : 50%;
+}
+.swiper-slide img{
+    width : 100%;
+    height : 100%;
+}
+
+.swiper-slide-blank {
+
+    background : #353f46;
+}
+
+.swiper-btn {
+    position      : absolute;
+    width         : 50%;
+    height        : 50%;
+    top           : 25%;
+    left          : 25%;
+
+    background    : #40d0bb;
+    border-radius : 50%;
+}
+
+.swiper-btn i {
+    display   : block;
+    position  : relative;
+    font-size : 40px;
+    color     : #fff;
+    left      : 26%;
+    top       : 34%;
+}
+
+#watch-pic {
+    position : absolute;
+    left     : 130px;
+    bottom   : 20px;
+
+}
+#watch-pic img{
+    width    : 54px;
+    height   : 54px;
+}
+
+/*! =======================================================
+                      VERSION  4.4.0
+========================================================= */
+/*! =========================================================
+ * bootstrap-slider.js
+ *
+ * Maintainers:
+ *		Kyle Kemp
+ *			- Twitter: @seiyria
+ *			- Github:  seiyria
+ *		Rohit Kalkur
+ *			- Twitter: @Rovolutionary
+ *			- Github:  rovolution
+ *
+ * =========================================================
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ========================================================= */
+.slider {
+    display        : inline-block;
+    vertical-align : middle;
+    position       : relative;
+}
+
+.slider.slider-horizontal {
+    width  : 210px;
+    height : 20px;
+}
+
+.slider.slider-horizontal .slider-track {
+    height     : 10px;
+    width      : 100%;
+    margin-top : -5px;
+    top        : 50%;
+    left       : 0;
+}
+
+.slider.slider-horizontal .slider-selection {
+    height : 100%;
+    top    : 0;
+    bottom : 0;
+}
+
+.slider.slider-horizontal .slider-handle {
+    margin-left : -35px;
+    margin-top  : 3px;
+}
+
+.slider.slider-horizontal .slider-handle.triangle {
+    border-width        : 0 10px 10px 10px;
+    width               : 0;
+    height              : 0;
+    border-bottom-color : #0480be;
+    margin-top          : 0;
+}
+
+.slider.slider-vertical {
+    height : 210px;
+    width  : 20px;
+}
+
+.slider.slider-vertical .slider-track {
+    width       : 3px;
+    height      : 100%;
+    margin-left : -5px;
+    left        : 50%;
+    top         : 0;
+}
+
+.slider.slider-vertical .slider-selection {
+    width  : 100%;
+    left   : 0;
+    top    : 0;
+    bottom : 0;
+}
+
+.slider.slider-vertical .slider-handle {
+    margin-left : 0px;
+    margin-top  : -61px;
+}
+
+.slider.slider-vertical .slider-handle.triangle {
+    border-width      : 10px 0 10px 10px;
+    width             : 1px;
+    height            : 1px;
+    border-left-color : #0480be;
+    margin-left       : 0;
+}
+
+.slider.slider-disabled .slider-handle {
+    background-image  : -webkit-linear-gradient(top, #dfdfdf 0%, #bebebe 100%);
+    background-image  : -o-linear-gradient(top, #dfdfdf 0%, #bebebe 100%);
+    background-image  : linear-gradient(to bottom, #dfdfdf 0%, #bebebe 100%);
+    background-repeat : repeat-x;
+    filter            : progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffdfdfdf', endColorstr='#ffbebebe', GradientType=0);
+}
+
+.slider.slider-disabled .slider-track {
+    background-image  : -webkit-linear-gradient(top, #e5e5e5 0%, #e9e9e9 100%);
+    background-image  : -o-linear-gradient(top, #e5e5e5 0%, #e9e9e9 100%);
+    background-image  : linear-gradient(to bottom, #e5e5e5 0%, #e9e9e9 100%);
+    background-repeat : repeat-x;
+    filter            : progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe5e5e5', endColorstr='#ffe9e9e9', GradientType=0);
+    cursor            : not-allowed;
+}
+
+.slider input {
+    display : none;
+}
+
+.slider .tooltip.top {
+    margin-top : -36px;
+}
+
+.slider .tooltip-inner {
+    white-space : nowrap;
+}
+
+.slider .hide {
+    display : none;
+}
+
+.slider-track {
+    position         : absolute;
+    cursor           : pointer;
+    background       : #72d2c8;
+    background-image : -o-linear-gradient(top, #f5f5f5 0%, #f9f9f9 100%);
+    /* background-image   : linear-gradient(to bottom, #f5f5f5 0%, #f9f9f9 100%); */
+    /* background-repeat  : repeat-x; */
+    filter           : progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5', endColorstr='#fff9f9f9', GradientType=0);
+    /* -webkit-box-shadow : inset 0 1px 2px rgba(0, 0, 0, 0.1); */
+    /* box-shadow         : inset 0 1px 2px rgba(0, 0, 0, 0.1); */
+    border-radius    : 4px;
+}
+
+.slider-selection {
+    position          : absolute;
+    background        : #2f2f2f;
+    background-image  : -o-linear-gradient(top, #f9f9f9 0%, #f5f5f5 100%);
+    /* background-image   : linear-gradient(to bottom, #f9f9f9 0%, #f5f5f5 100%); */
+    background-repeat : repeat-x;
+    filter            : progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff9f9f9', endColorstr='#fff5f5f5', GradientType=0);
+    /* -webkit-box-shadow : inset 0 -1px 0 rgba(0, 0, 0, 0.15); */
+    /* box-shadow         : inset 0 -1px 0 rgba(0, 0, 0, 0.15); */
+    /* -webkit-box-sizing : border-box; */
+    -moz-box-sizing   : border-box;
+    box-sizing        : border-box;
+    border-radius     : 4px;
+}
+
+.slider-handle {
+    position          : absolute;
+    width             : 100px;
+    height            : 100px;
+    background-color  : #337ab7;
+    background-image  : -webkit-linear-gradient(top, #149bdf 0%, #0480be 100%);
+    background-image  : -o-linear-gradient(top, #149bdf 0%, #0480be 100%);
+    background-image  : linear-gradient(to bottom, #149bdf 0%, #0480be 100%);
+    background-repeat : repeat-x;
+    filter            : progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff149bdf', endColorstr='#ff0480be', GradientType=0);
+    /* filter             : none; */
+    /* -webkit-box-shadow : inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05); */
+    /* box-shadow         : inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05); */
+    /* border             : 0px solid transparent; */
+}
+
+.slider-handle.round {
+    border-radius : 50%;
+}
+
+.slider-handle.triangle {
+    background : transparent none;
+}
+
+.slider-handle.custom {
+    background      : url("../img/Gesture Icons-02.png");
+    background-size : 100%;
+
+    /* You can customize the handle and set a background image */
+}
+
+.layer{
+    position : absolute;
+    top : 0;
+    left : 0;
+}
+.cursorContainer{
+    position : absolute;
+    top : 0;
+    left : 0;
+    z-index : 999;
+}
+
+.cursorPoint{
+    border-radius: 50%;
+    width : 32px;
+    height : 32px;
+    background : #40d58e;
+}
+.layer{
+    transition: opacity 0.5s ease;
+}
+.lock-screen-time{
+    position : absolute;
+    width : 100%;
+    color : #ffffff;
+    font-size : 78px;
+    top : 64px;
+    text-align : center;
+    font-family : ProximaNova-Light;
+
+}
+#overview-level{
+    transform: scale(1.4);
+}
+#browsing-level{
+    position : relative;
+    z-index: 99;
+    transition: opacity 0.5s ease;
+}
+

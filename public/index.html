@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <link href='css/fontello.css' rel='stylesheet'/>
+    <link href='css/style.css' rel='stylesheet'/>
+    <link href='css/swiper.css' rel='stylesheet'/>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="http://js.leapmotion.com/leap-0.6.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+
+</head>
+<body>
+</body>
+<div class="container-fluid" id="app">
+
+    <div class="general-info" v-if="false">
+        <h1 id="main-title">Exploring 3-dimensional interactions on wearable devices</h1>
+        <img id="main-gesture" src="img/gesture1.png">
+
+
+    </div>
+
+    <div class="row watch-row">
+        <section class="watch-panel main-panel">
+
+            <div class="main-panel-content left">
+                <div class="panel-title">
+                    Watch Interface
+                </div>
+                <div class="watch-container ">
+                    <div class="watch-screen">
+
+                        <div id="watchCursor" class="cursorContainer">
+                            <div class="cursorPoint"></div>
+                        </div>
+
+
+                        <div class="watch-content">
+                            <div v-show="appControl.viewPicked==='slide'">
+
+                                <div id="lock-screen" class="layer">
+                                    <h1 class="lock-screen-time">{{timeString}}</h1>
+                                    <img width="325px" height="325px" src="img/lock.png"/>
+                                </div>
+
+                                <div id="overview-level" class="layer">
+                                    <img width="325px" height="325px" src="img/ov1.png"/>
+                                </div>
+
+                                <div id="action-level" class="layer">
+                                    <div class="screen-btn top-btn">
+                                        <span>Back</span>
+                                    </div>
+                                    <div class="screen-btn left-btn swiper-button-prev">
+                                        <span>Prev</span>
+                                    </div>
+                                    <div class="screen-btn right-btn swiper-button-next">
+                                        <span>Next</span>
+                                    </div>
+                                    <div class="screen-btn bottom-btn">
+                                        <span>Home</span>
+                                    </div>
+                                    <img width="325px" height="325px" src="img/ac1.png"/>
+                                </div>
+
+                                <div id="browsing-level">
+                                    <div class="swiper-container">
+                                        <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+                                                <img src="img/br1.png"/>
+                                            </div>
+                                            <div class="swiper-slide swiper-slide-blank">
+                                                <div class="swiper-btn"><i class="icon-chat"></i></div>
+                                            </div>
+
+                                            <div class="swiper-slide">Slide 2</div>
+                                            <div class="swiper-slide">Slide 4</div>
+                                            <div class="swiper-slide">Slide 5</div>
+                                            <div class="swiper-slide">Slide 6</div>
+                                        </div>
+                                        <!-- Add Pagination -->
+                                        <div class="swiper-pagination"></div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div v-show="appControl.viewPicked==='numpad'">
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="info-panel main-panel">
+
+            <div class="main-panel-content">
+                <div class="panel-title">
+                    Layer Definition
+                </div>
+                <div class="info-content info-graph">
+                    <img src="img/watch-info.png" alt="">
+                    <div id="infoCursor" class="cursorContainer">
+                        <div class="cursorPoint"></div>
+                        <h6>{{cursorName}}</h6>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </section>
+    </div>
+
+    <div class="row log-row">
+        <div class="log-container">
+            <div class="row">
+                <div class="log-panel">
+                    <div class="log-panel-content"
+                         v-bind:class="{
+                         red: !socketStatus,
+                         green: socketStatus&&trackingStatus,
+                         yellow: socketStatus&&!trackingStatus
+                         }">
+                        <h2>
+                            <span class="icon-ok-circle" v-if="leapStatus"></span>
+                            <span class="icon-cancel-circle" v-if="!leapStatus"></span>
+                            Leap Motion
+                        </h2>
+                        <h2>
+                            <span class="icon-ok-circle" v-if="socketStatus"></span>
+                            <span class="icon-cancel-circle" v-if="!socketStatus"></span>
+                            Sockect
+                        </h2>
+                        <h2>
+                            <span class="icon-ok-circle" v-if="trackingStatus"></span>
+                            <span class="icon-cancel-circle" v-if="!trackingStatus"></span>
+                            Tracking
+                        </h2>
+                        <!--<h4> Platform: {{platform}}</h4>-->
+
+                    </div>
+                </div>
+                <div class="log-panel wide">
+                    <div class="log-panel-content">
+                        <h3>Hand movement type Selection</h3>
+                        <input type="radio" id="one" value=1 v-model="appControl.scalePicked">
+                        <label for="one"> x1.0 -- Finger Movement</label>
+                        <br>
+                        <input type="radio" id="two" value=2 v-model="appControl.scalePicked">
+                        <label for="two"> x3.0 -- Wrist Movement</label>
+                        <br>
+                        <input type="radio" id="three" value=3 v-model="appControl.scalePicked">
+                        <label for="three"> x5.0 -- Arm Movement</label>
+
+                        <div class="gesture-preview">
+                            <img src="" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="log-panel">
+                    <div class="log-panel-content">
+                        <h3>View Selection</h3>
+                        <input type="radio" value='slide' v-model="appControl.viewPicked">
+                        <label>Slide view</label>
+                        <br>
+                        <input type="radio" value='numpad' v-model="appControl.viewPicked">
+                        <label>Numpad view</label>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+
+
+                <div class="log-panel">
+                    <div class="log-panel-content blue">
+                        <h3> General Information</h3>
+                        <h4> Platform: {{platform}}</h4>
+                        <h4><i class="info-sign-dot" v-bind:class="{ on: leapStatus }"></i>Leap status: {{leapStatus}}
+                        </h4>
+                        <h4><i class="info-sign-dot" v-bind:class="{ on: socketStatus }"></i>Socket status:
+                            {{socketStatus}}
+                        </h4>
+                    </div>
+                </div>
+
+
+                <div class="log-panel">
+                    <div class="log-panel-content">
+                        <h3>Frame data</h3>
+                        <h4 v-html="frameData"></h4>
+                    </div>
+                </div>
+
+
+                <div class="log-panel">
+                    <div class="log-panel-content">
+                        <h3>Cursor data</h3>
+                        <h4 >Finger Pos: <span class="data-text">[ {{cursorPosString}} ]</span></h4>
+                        <h4 >Cursor Pos: <span class="data-text">{{cursorPosArray}}</span></h4>
+
+                        <h4 >Current Layer: <span class="data-text">{{cursorLevel}}</span></h4>
+
+                        <h4 >Current Folder: <span class="data-text">{{currentFolder.name}}</span></h4>
+                        <h4 >Cursor Highlighted: <span class="data-text">{{cursorOnEvent}}</span></h4>
+
+
+                    </div>
+                </div>
+
+                <div class="log-panel">
+                    <div class="log-panel-content">
+
+                        <h3>Other Functions</h3>
+
+                        <div id='btn1' class="btn btn-primary">Reset</div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="js/anime.js"></script>
+<script src="socket.io/socket.io.js"></script>
+<script src="js/swiper.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+    $(function () {
+
+    });
+</script>
+
+</html>
