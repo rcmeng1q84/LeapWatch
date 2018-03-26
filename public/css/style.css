@@ -100,6 +100,7 @@ Main Styles
     padding-top: 10px;
     padding-bottom: 0;
     float: left;
+    overflow: hidden;
 }
 
 
@@ -217,6 +218,7 @@ log
     border-radius: 4px;
     font-size: 14px;
     padding: 6px 16px;
+    margin-bottom : 6px;
 }
 
 .gesture-preview{
@@ -244,7 +246,7 @@ main-panel
     /* left : 0; */
     /* box-shadow: 0 5px 12px rgba(0, 0, 0, 0.02); */
     padding : 25px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 .main-panel-content.left{
     float: right;
@@ -308,9 +310,10 @@ watch panel!**!
 }
 
 .info-content{
+    position : relative;
     width : 100%;
     height : 325px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 
@@ -373,6 +376,15 @@ watch panel!**!
 .right-btn {
     right : -200px;
     top   : 72.5px;
+}
+
+.middle-btn{
+    background: #fff;
+    opacity: 0;
+    top: 136px;
+    left: 122px;
+    width: 80px;
+    height: 80px;
 }
 
 .top-btn span {
@@ -650,10 +662,73 @@ watch panel!**!
 
 .cursorPoint{
     border-radius: 50%;
+    position : relative;
     width : 32px;
     height : 32px;
-    background : #40d58e;
+    opacity :0.8;
 }
+
+.cursorLoading{
+    position : absolute;
+    top : 0;
+    left : 0;
+    border-radius: 50%;
+    overflow: hidden;
+    width : 32px;
+    height : 32px;
+
+    transition: all 1s;
+
+}
+
+.cursorLoadingPoint {
+    width : 32px;
+    height : 0%;
+
+    background : #63ffa6;
+
+}
+
+#infoCursor{
+    left: 200px;
+}
+
+#infoCursor .cursorPoint{
+    opacity : 1;
+    width: 75px;
+    height: 75px;
+    /* background : #fff; */
+}
+
+#infoCursor .cursorPoint img{
+    position : absolute;
+    top : 6%;
+    left : 6%;
+    width : 88%;
+    height : 88%;
+}
+
+
+#layerDefinition{
+    left: 220px;
+    bottom: 0;
+    width: 200px;
+    position : absolute;
+}
+
+#layerDefinition h6{
+    /* font-family : ProximaNova-Bold; */
+
+    font-size : 15px;
+    color: #42aafb;
+}
+
+#layerDefinition p{
+
+    font-size: 12px;
+    margin : 0;
+}
+
 .layer{
     transition: opacity 0.5s ease;
 }
@@ -674,5 +749,12 @@ watch panel!**!
     position : relative;
     z-index: 99;
     transition: opacity 0.5s ease;
+}
+#popup-screen{
+    background : #ffffff;
+    z-index : 999;
+    transform: scale(0);
+    width: 325px;
+    height: 325px;
 }
 

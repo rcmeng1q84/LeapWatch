@@ -43,12 +43,22 @@
 
                         <div id="watchCursor" class="cursorContainer">
                             <div class="cursorPoint"></div>
+                            <div class="cursorLoading">
+                                <div class="cursorLoadingPoint"></div>
+                            </div>
                         </div>
 
 
                         <div class="watch-content">
                             <div v-show="appControl.viewPicked==='slide'">
 
+                                <div id="popup-screen" class="layer">
+                                    <p>You have entered
+                                        <br/>
+                                        {{currentIcon.name}} App
+                                    </p>
+
+                                </div>
                                 <div id="lock-screen" class="layer">
                                     <h1 class="lock-screen-time">{{timeString}}</h1>
                                     <img width="325px" height="325px" src="img/lock.png"/>
@@ -60,18 +70,22 @@
 
                                 <div id="action-level" class="layer">
                                     <div class="screen-btn top-btn">
-                                        <span>Back</span>
+                                        <span>Edit name</span>
                                     </div>
                                     <div class="screen-btn left-btn swiper-button-prev">
-                                        <span>Prev</span>
+                                        <span>Share</span>
                                     </div>
                                     <div class="screen-btn right-btn swiper-button-next">
-                                        <span>Next</span>
+                                        <span>Move</span>
                                     </div>
                                     <div class="screen-btn bottom-btn">
-                                        <span>Home</span>
+                                        <span>Uninstall</span>
                                     </div>
-                                    <img width="325px" height="325px" src="img/ac1.png"/>
+                                    <div class="screen-btn middle-btn">
+
+                                    </div>
+                                    <img width="325px" height="325px" v-bind:src="'img/ac'+currentIcon.num+'.png'"/>
+
                                 </div>
 
                                 <div id="browsing-level">
@@ -80,12 +94,16 @@
                                             <div class="swiper-slide">
                                                 <img src="img/br1.png"/>
                                             </div>
-                                            <div class="swiper-slide swiper-slide-blank">
-                                                <div class="swiper-btn"><i class="icon-chat"></i></div>
+                                            <div class="swiper-slide">
+                                                <img src="img/br2.png"/>
                                             </div>
 
-                                            <div class="swiper-slide">Slide 2</div>
-                                            <div class="swiper-slide">Slide 4</div>
+                                            <div class="swiper-slide">
+                                                <img src="img/br3.png"/>
+                                            </div>
+                                            <div class="swiper-slide">
+                                                <img src="img/br4.png"/>
+                                            </div>
                                             <div class="swiper-slide">Slide 5</div>
                                             <div class="swiper-slide">Slide 6</div>
                                         </div>
@@ -116,8 +134,26 @@
                 <div class="info-content info-graph">
                     <img src="img/watch-info.png" alt="">
                     <div id="infoCursor" class="cursorContainer">
-                        <div class="cursorPoint"></div>
-                        <h6>{{cursorName}}</h6>
+                        <div class="cursorPoint">
+                            <img src="img/hand.png" alt="">
+                        </div>
+
+                    </div>
+                    <div id="layerDefinition">
+                        <h6>{{cursorName}} Layer</h6>
+                        <p v-if="cursorLevel===0">
+                            When finger is out of the detection range, the screen will be auto-locked and the tracking will be paused.
+                        </p>
+                        <p v-if="cursorLevel===3">
+                            Pages are zoomed out, user can swipe and scroll to take a glance at the general information of pages or navigate to other pages.
+                        </p>
+                        <p v-if="cursorLevel===2">
+                            Users can swipe or scroll the current page to view content like the way they interact on 2D watch screens.
+                        </p>
+                        <p v-if="cursorLevel===1">
+                            All “clickable” buttons/functions are extracted to this layer.
+                        </p>
+
                     </div>
 
                 </div>
@@ -190,26 +226,29 @@
 
             <div class="row">
 
-
                 <div class="log-panel">
                     <div class="log-panel-content blue">
-                        <h3> General Information</h3>
-                        <h4> Platform: {{platform}}</h4>
-                        <h4><i class="info-sign-dot" v-bind:class="{ on: leapStatus }"></i>Leap status: {{leapStatus}}
-                        </h4>
-                        <h4><i class="info-sign-dot" v-bind:class="{ on: socketStatus }"></i>Socket status:
-                            {{socketStatus}}
-                        </h4>
-                    </div>
-                </div>
-
-
-                <div class="log-panel">
-                    <div class="log-panel-content">
                         <h3>Frame data</h3>
                         <h4 v-html="frameData"></h4>
                     </div>
                 </div>
+
+
+                <div class="log-panel">
+                    <div class="log-panel-content ">
+                        <h3>Cursor Event</h3>
+
+                        <h4 >Cursor Highlighted: <span class="data-text">{{cursorOnEvent}}</span></h4>
+                        <h4 >Hover: <span class="data-text">{{cursorHoverCount}}</span></h4>
+                        <h4 >Current Folder: <span class="data-text">{{currentFolder.name}}</span></h4>
+                        <h4 >Current Button: <span class="data-text">{{currentButton.name}}</span></h4>
+                        <h4 >Current Icon: <span class="data-text">{{currentIcon.name}}</span></h4>
+
+                    </div>
+                </div>
+
+
+
 
 
                 <div class="log-panel">
@@ -219,9 +258,7 @@
                         <h4 >Cursor Pos: <span class="data-text">{{cursorPosArray}}</span></h4>
 
                         <h4 >Current Layer: <span class="data-text">{{cursorLevel}}</span></h4>
-
-                        <h4 >Current Folder: <span class="data-text">{{currentFolder.name}}</span></h4>
-                        <h4 >Cursor Highlighted: <span class="data-text">{{cursorOnEvent}}</span></h4>
+                        <h4 >Current Scalse: <span class="data-text">{{currentScale}}</span></h4>
 
 
                     </div>
@@ -232,7 +269,8 @@
 
                         <h3>Other Functions</h3>
 
-                        <div id='btn1' class="btn btn-primary">Reset</div>
+                        <div id='btn1' class="btn btn-primary">Reset Slide</div>
+                        <div id='btn2' class="btn btn-primary">Reset Numpad</div>
 
 
                     </div>
