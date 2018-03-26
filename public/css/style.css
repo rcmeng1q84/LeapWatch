@@ -751,10 +751,33 @@ watch panel!**!
     transition: opacity 0.5s ease;
 }
 #popup-screen{
+    border-radius: 50%;
+    display: none;
     background : #ffffff;
     z-index : 999;
-    transform: scale(0);
+    transform: scale(0.2);
     width: 325px;
     height: 325px;
 }
 
+#popup-screen p {
+    width: 250px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 122px;
+    font-size: 24px;
+}
+
+#popup-screen span{
+    background : #dfdfdf;
+    display: inline-block;
+    padding: .25em .4em;
+    /* font-size: 75%; */
+    /* font-weight: 700; */
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+}

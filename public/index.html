@@ -55,7 +55,8 @@
                                 <div id="popup-screen" class="layer">
                                     <p>You have entered
                                         <br/>
-                                        {{currentIcon.name}} App
+                                        <span >{{currentIcon.name}}</span>
+                                        App
                                     </p>
 
                                 </div>
@@ -196,13 +197,13 @@
                     <div class="log-panel-content">
                         <h3>Hand movement type Selection</h3>
                         <input type="radio" id="one" value=1 v-model="appControl.scalePicked">
-                        <label for="one"> x1.0 -- Finger Movement</label>
+                        <label for="one"> x1.0 -- Arm Movement</label>
                         <br>
                         <input type="radio" id="two" value=2 v-model="appControl.scalePicked">
                         <label for="two"> x3.0 -- Wrist Movement</label>
                         <br>
                         <input type="radio" id="three" value=3 v-model="appControl.scalePicked">
-                        <label for="three"> x5.0 -- Arm Movement</label>
+                        <label for="three"> x5.0 -- Finger Movement</label>
 
                         <div class="gesture-preview">
                             <img src="" alt="">
@@ -239,7 +240,7 @@
                         <h3>Cursor Event</h3>
 
                         <h4 >Cursor Highlighted: <span class="data-text">{{cursorOnEvent}}</span></h4>
-                        <h4 >Hover: <span class="data-text">{{cursorHoverCount}}</span></h4>
+                        <h4 >Hover Percentage: <span class="data-text">{{cursorHoverCount*2}}%</span></h4>
                         <h4 >Current Folder: <span class="data-text">{{currentFolder.name}}</span></h4>
                         <h4 >Current Button: <span class="data-text">{{currentButton.name}}</span></h4>
                         <h4 >Current Icon: <span class="data-text">{{currentIcon.name}}</span></h4>

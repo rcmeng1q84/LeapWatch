@@ -176,7 +176,7 @@ $(function () {
                     showView('#overview-level');
                 }
                 if (val === 1) {
-                    this.baseScale=[2.6,3.0];
+                    this.baseScale=[3.7,4.3];
 
                     brScale = anime({
                         targets   : '#browsing-level',
@@ -197,7 +197,7 @@ $(function () {
                 }
                 if (val === 2) {
                     this.baseScale=[1.8,2.2];
-
+                    this.currentButton.last='None';
                     $('#browsing-level').css({
                         transform: 'translate(' + transX + 'px,' + transY + 'px)'
                     })
@@ -642,7 +642,7 @@ function getFolderByPos(a) {
         tPos = [63, 42];
     }
     else {
-        slideTo(3);
+        setTimeout(slideTo(3),800);
         name = 'None';
         tPos = [0, 0];
     }
@@ -705,6 +705,10 @@ function getIconByPos(a) {
 }
 
 function showAppPopup() {
+    $('#popup-screen').css({
+        zIndex:'999',
+        display:'block'
+    });
     anime({
         targets: '#popup-screen',
         opacity: 1,
