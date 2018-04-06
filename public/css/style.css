@@ -224,11 +224,11 @@ log
 .gesture-preview{
     border-radius: 6px;
     width: 150px;
-    height: 68px;
+    height: 94px;
     background: #42aafb;
     position : absolute;
     right: 25px;
-    top: 35px;
+    top: 12px;
 }
 
 .data-text{
@@ -246,6 +246,7 @@ main-panel
     /* left : 0; */
     /* box-shadow: 0 5px 12px rgba(0, 0, 0, 0.02); */
     padding : 25px;
+    position: relative;
     /* overflow: hidden; */
 }
 .main-panel-content.left{
@@ -287,7 +288,7 @@ watch panel!**!
 
     position      : relative;
     /* border: 7px solid #289fff; */
-    box-shadow: 5px 5px 40px #1f242959;
+    /*box-shadow: 5px 5px 40px #1f242959;*/
 }
 
 .watch-screen {cursor        : url(../img/circle.png), auto;position      : absolute;width: 325px;height: 325px;border-radius : 50%;overflow      : hidden;background    : #353f46;}
@@ -780,4 +781,31 @@ watch panel!**!
     white-space: nowrap;
     vertical-align: baseline;
     border-radius: .25rem;
+}
+
+#watch-overlay{
+    z-index : 9999;
+    background : url("../img/white_overlay.png");
+    background-size: 100%;
+    width : 325px;
+    height : 325px;
+    position : absolute;
+    left: 25px;
+
+}
+#watch-overlay-shadow{
+    border-radius: 50%;
+    width : 325px;
+    height : 325px;
+    box-shadow: 0 0px 30px rgba(255, 214, 107, 0.93) inset;
+    transition: all 0.4s;
+
+}
+
+.inline-form input{
+    display : inline-block;
+    margin-right : 2px;
+}
+.inline-form label{
+    margin-right : 12px;
 }

@@ -38,7 +38,12 @@
                 <div class="panel-title">
                     Watch Interface
                 </div>
+                <div id="watch-overlay">
+
+                    <div id="watch-overlay-shadow"></div>
+                </div>
                 <div class="watch-container ">
+
                     <div class="watch-screen">
 
                         <div id="watchCursor" class="cursorContainer">
@@ -52,14 +57,17 @@
                         <div class="watch-content">
                             <div v-show="appControl.viewPicked==='slide'">
 
+
                                 <div id="popup-screen" class="layer">
                                     <p>You have entered
                                         <br/>
-                                        <span >{{currentIcon.name}}</span>
+                                        <span>{{currentIcon.name}}</span>
                                         App
                                     </p>
 
                                 </div>
+
+
                                 <div id="lock-screen" class="layer">
                                     <h1 class="lock-screen-time">{{timeString}}</h1>
                                     <img width="325px" height="325px" src="img/lock.png"/>
@@ -117,6 +125,11 @@
                             </div>
                             <div v-show="appControl.viewPicked==='numpad'">
 
+                                <div id="numpad-screen">
+                                    <img width="325px" height="325px"
+                                         v-bind:src="'img/num'+appControl.numpadPicked+'.png'" alt="">
+
+                                </div>
                             </div>
 
                         </div>
@@ -133,30 +146,57 @@
                     Layer Definition
                 </div>
                 <div class="info-content info-graph">
-                    <img src="img/watch-info.png" alt="">
-                    <div id="infoCursor" class="cursorContainer">
-                        <div class="cursorPoint">
-                            <img src="img/hand.png" alt="">
+                    <div v-show="appControl.viewPicked==='slide'">
+                        <img src="img/watch-info.png" alt="">
+                        <div id="infoCursor" class="cursorContainer">
+                            <div class="cursorPoint">
+                                <img src="img/hand.png" alt="">
+                            </div>
+
+                        </div>
+                        <div id="layerDefinition">
+                            <h6>{{cursorName}} Layer</h6>
+                            <p v-if="cursorLevel===0">
+                                When finger is out of the detection range, the screen will be auto-locked and the
+                                tracking
+                                will be paused.
+                            </p>
+                            <p v-if="cursorLevel===3">
+                                Pages are zoomed out, user can swipe and scroll to take a glance at the general
+                                information
+                                of pages or navigate to other pages.
+                            </p>
+                            <p v-if="cursorLevel===2">
+                                Users can swipe or scroll the current page to view content like the way they interact on
+                                2D
+                                watch screens.
+                            </p>
+                            <p v-if="cursorLevel===1">
+                                All “clickable” buttons/functions are extracted to this layer.
+                            </p>
+
                         </div>
 
                     </div>
-                    <div id="layerDefinition">
-                        <h6>{{cursorName}} Layer</h6>
-                        <p v-if="cursorLevel===0">
-                            When finger is out of the detection range, the screen will be auto-locked and the tracking will be paused.
-                        </p>
-                        <p v-if="cursorLevel===3">
-                            Pages are zoomed out, user can swipe and scroll to take a glance at the general information of pages or navigate to other pages.
-                        </p>
-                        <p v-if="cursorLevel===2">
-                            Users can swipe or scroll the current page to view content like the way they interact on 2D watch screens.
-                        </p>
-                        <p v-if="cursorLevel===1">
-                            All “clickable” buttons/functions are extracted to this layer.
-                        </p>
+                    <div v-show="appControl.viewPicked==='numpad'">
+
+                        <h2>Session {{numpadFour.session}} | Trial {{numpadSession.trial}}/{{numpadSession.len}}</h2>
+                        <h4>Number generated: </h4>
+                        <h2>
+                            <span >>> {{numpadFour.four}}</span>
+                        </h2>
+                        <h4>Number input: </h4>
+                        <h2>
+                            <span v-if="!numpadSession.finished && numpadFour.four">>> {{numpadInput}}</span>
+                            <span v-if="!numpadFour.four">Waiting to start...</span>
+                            <span v-if="numpadSession.finished">Session finished</span>
+                        </h2>
+
+                        <div id='start-session-btn' class="btn btn-primary">Start session</div>
+                        <div id='download-csv-btn' class="btn btn-primary">Export Log</div>
+
 
                     </div>
-
                 </div>
 
 
@@ -206,19 +246,31 @@
                         <label for="three"> x5.0 -- Finger Movement</label>
 
                         <div class="gesture-preview">
-                            <img src="" alt="">
+                            <img width="140px" v-bind:src="'img/hand'+appControl.scalePicked+'.png'" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="log-panel">
-                    <div class="log-panel-content">
+                    <div class="log-panel-content app-control">
                         <h3>View Selection</h3>
                         <input type="radio" value='slide' v-model="appControl.viewPicked">
                         <label>Slide view</label>
                         <br>
                         <input type="radio" value='numpad' v-model="appControl.viewPicked">
                         <label>Numpad view</label>
+                        <div v-if="appControl.viewPicked==='numpad'">
+                            <div class="inline-form">
+                                <input type="radio" v-model="appControl.numpadPicked" value=1>
+                                <label>3</label>
 
+                                <input type="radio" v-model="appControl.numpadPicked" value=2>
+                                <label>6</label>
+
+                                <input type="radio" v-model="appControl.numpadPicked" value=3>
+                                <label>12</label>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -230,6 +282,9 @@
                 <div class="log-panel">
                     <div class="log-panel-content blue">
                         <h3>Frame data</h3>
+
+
+                        <h4>leapFrame ID: <span class="data-text">{{leapFrameID}}</span></h4>
                         <h4 v-html="frameData"></h4>
                     </div>
                 </div>
@@ -239,27 +294,33 @@
                     <div class="log-panel-content ">
                         <h3>Cursor Event</h3>
 
-                        <h4 >Cursor Highlighted: <span class="data-text">{{cursorOnEvent}}</span></h4>
-                        <h4 >Hover Percentage: <span class="data-text">{{cursorHoverCount*2}}%</span></h4>
-                        <h4 >Current Folder: <span class="data-text">{{currentFolder.name}}</span></h4>
-                        <h4 >Current Button: <span class="data-text">{{currentButton.name}}</span></h4>
-                        <h4 >Current Icon: <span class="data-text">{{currentIcon.name}}</span></h4>
+                        <h4>Cursor Highlighted: <span class="data-text">{{cursorOnEvent}}</span></h4>
+                        <h4>Hover Percentage: <span class="data-text">{{leapFrameID-cursorHoverStartFrame}}</span></h4>
+                        <h4>Hover Percentage: <span class="data-text">{{cursorHoverCount*2}}%</span></h4>
+
+                        <div v-if="appControl.viewPicked==='slide'">
+                            <h4>Current Folder: <span class="data-text">{{currentFolder.name}}</span></h4>
+                            <h4>Current Button: <span class="data-text">{{currentButton.name}}</span></h4>
+                            <h4>Current Icon: <span class="data-text">{{currentIcon.name}}({{currentIcon.num}})</span>
+                            </h4>
+
+                        </div>
+                        <div v-if="appControl.viewPicked==='numpad'">
+                            <h4>Current Number: <span class="data-text">{{currentNum.name}}</span></h4>
+                        </div>
 
                     </div>
                 </div>
 
 
-
-
-
                 <div class="log-panel">
                     <div class="log-panel-content">
                         <h3>Cursor data</h3>
-                        <h4 >Finger Pos: <span class="data-text">[ {{cursorPosString}} ]</span></h4>
-                        <h4 >Cursor Pos: <span class="data-text">{{cursorPosArray}}</span></h4>
+                        <h4>Finger Pos: <span class="data-text">[ {{cursorPosString}} ]</span></h4>
+                        <h4>Cursor Pos: <span class="data-text">{{cursorPosArray}}</span></h4>
 
-                        <h4 >Current Layer: <span class="data-text">{{cursorLevel}}</span></h4>
-                        <h4 >Current Scalse: <span class="data-text">{{currentScale}}</span></h4>
+                        <h4>Current Layer: <span class="data-text">{{cursorLevel}}</span></h4>
+                        <h4>Current Scalse: <span class="data-text">{{currentScale}}</span></h4>
 
 
                     </div>
@@ -271,7 +332,7 @@
                         <h3>Other Functions</h3>
 
                         <div id='btn1' class="btn btn-primary">Reset Slide</div>
-                        <div id='btn2' class="btn btn-primary">Reset Numpad</div>
+                        <div id='btn2' class="btn btn-primary">Generate Number</div>
 
 
                     </div>

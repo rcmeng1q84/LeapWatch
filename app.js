@@ -12,9 +12,23 @@ function onConnection(socket){
     socket.on('disconnect', function(){
         console.log('user disconnected');
     });
-    socket.on('drawing', function(data) {
-        io.emit('drawing', data);
-        console.log('Data:  ' + data.x+','+data.y);
+    // socket.on('drawing', function(data) {
+    //     io.emit('drawing', data);
+    //     //console.log('Data:  ' + data.x+','+data.y);
+    // });
+
+    socket.on('data', function(data) {
+        io.emit('data', data);
+        console.log('Data:  ' + data);
+    });
+    socket.on('numpad', function(data) {
+        io.emit('numpad', data);
+        console.log('numpad:  ' + data);
+    });
+
+    socket.on('option', function(data) {
+        io.emit('option', data);
+        console.log('option:  ' + data.view+','+data.scale);
     });
 
 }
